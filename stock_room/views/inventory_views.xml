@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <!-- List View -->
+    <record id="view_inventory_overview_list" model="ir.ui.view">
+        <field name="name">stockroom.inventory.list</field>
+        <field name="model">stockroom.inventory</field>
+        <field name="arch" type="xml">
+            <list string="Inventory Overview" default_order="expiry_date asc, quantity desc">
+                <!-- Highlight expired products in red -->
+                <field name="product_id"/>
+                <field name="outlet_id"/>
+                <field name="location_id"/>
+                <field name="quantity" decoration-warning="quantity &lt;= reorder_level"/>
+                <field name="expiry_date" decoration-danger="expiry_date &lt;= context_today()"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_inventory_overview_form" model="ir.ui.view">
+        <field name="name">stockroom.inventory.form</field>
+        <field name="model">stockroom.inventory</field>
+        <field name="arch" type="xml">
+            <form string="Inventory Detail">
+                <sheet>
+                    <group>
+                        <field name="product_id"/>
+                        <field name="outlet_id"/>
+                        <field name="location_id"/>
+                        <field name="quantity"/>
+                        <field name="expiry_date"/>
+                        <field name="delivery_line_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_inventory_overview" model="ir.actions.act_window">
+        <field name="name">Stock Overview</field>
+        <field name="res_model">stockroom.inventory</field>
+        <field name="view_mode">list,form</field>
+        <field name="help">View current stock levels in the stockroom</field>
+    </record>
+
+</odoo>

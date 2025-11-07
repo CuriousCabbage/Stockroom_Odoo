@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- List View: show deliveries with basic info -->
+    <record id="view_inventory_receive_list" model="ir.ui.view">
+        <field name="name">stockroom.delivery.list</field>
+        <field name="model">stockroom.delivery</field>
+        <field name="arch" type="xml">
+            <list string="Deliveries">
+                <field name="vendor_id"/>
+                <field name="date_received"/>
+                <field name="reference"/>
+                <field name="note"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View: header + lines -->
+    <record id="view_inventory_receive_form" model="ir.ui.view">
+        <field name="name">stockroom.delivery.form</field>
+        <field name="model">stockroom.delivery</field>
+        <field name="arch" type="xml">
+            <form string="Receive Products">
+                <header>
+                    <button name="action_open_confirm_wizard" type="object"
+                            string="Confirm" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_open_cancel_wizard" type="object"
+                            string="Cancel" class="btn-warning"
+                            invisible="state != 'draft'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,cancelled"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="vendor_id"/>
+                        <field name="date_received"/>
+                        <field name="reference"/>
+                        <field name="note"/>
+                        <field name="state" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Delivery Lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="outlet_id"/>
+                                    <field name="location_id"/>
+                                    <field name="quantity"/>
+                                    <field name="expiry_date"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_stockroom_delivery_confirm_wizard" model="ir.ui.view">
+        <field name="name">stockroom.delivery.confirm.wizard.form</field>
+        <field name="model">stockroom.delivery.confirm.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Confirm Delivery">
+                <sheet>
+                    <group>
+                        <field name="delivery_id" invisible="1"/>
+                    </group>
+                    <field name="line_ids" nolabel="1">
+                        <list create="0" edit="0" delete="0">
+                            <field name="product_name"/>
+                            <field name="outlet_id"/>
+                            <field name="location_id"/>
+                            <field name="quantity"/>
+                            <field name="expiry_date"/>
+                        </list>
+                    </field>
+                    <footer>
+                        <button string="Confirm Delivery" name="action_confirm" type="object" class="btn-primary"/>
+                        <button string="Close" class="btn-default" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Cancel Wizard -->
+    <record id="view_stockroom_delivery_cancel_wizard" model="ir.ui.view">
+        <field name="name">stockroom.delivery.cancel.wizard.form</field>
+        <field name="model">stockroom.delivery.cancel.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Cancel Delivery">
+                <sheet>
+                    <group>
+                        <field name="delivery_id" invisible="1"/>
+                        <div class="o_form_label">
+                            Are you sure you want to cancel this delivery? This will not change inventory.
+                        </div>
+                    </group>
+                    <footer>
+                        <button string="Yes, Cancel" name="action_cancel" type="object" class="btn-danger"/>
+                        <button string="Close" class="btn-default" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Action -->
+    <record id="action_inventory_receive" model="ir.actions.act_window">
+        <field name="name">Receive</field>
+        <field name="res_model">stockroom.delivery</field>
+        <field name="view_mode">list,form</field>
+        <field name="help">Record incoming deliveries of products</field>
+    </record>
+
+</odoo>
