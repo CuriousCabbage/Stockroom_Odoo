@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="view_stockroom_location_tree" model="ir.ui.view">
+        <field name="name">stockroom.location.tree</field>
+        <field name="model">stockroom.location</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="description"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_stockroom_location_form" model="ir.ui.view">
+        <field name="name">stockroom.location.form</field>
+        <field name="model">stockroom.location</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="type"/>
+                        <field name="description"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Actions for Locations -->
+    <record id="action_stockroom_location" model="ir.actions.act_window">
+        <field name="name">Locations</field>
+        <field name="res_model">stockroom.location</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new location.
+            </p>
+        </field>
+    </record>
+
+</odoo>

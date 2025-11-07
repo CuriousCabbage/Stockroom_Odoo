@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Top Level Menu -->
+    <menuitem id="menu_inventory_root"
+              name="Stockroom"
+              sequence="10"/>
+
+    <!-- Submenu: Receive -->
+    <menuitem id="menu_inventory_receive"
+              name="Receive"
+              parent="menu_inventory_root"
+              action="action_inventory_receive"
+              sequence="20"/>
+
+    <!-- Submenu: Use -->
+    <menuitem id="menu_inventory_use"
+              name="Use"
+              parent="menu_inventory_root"
+              action="action_inventory_use"
+              sequence="30"/>
+
+    <!-- Submenu: Stock Overview -->
+    <menuitem id="menu_inventory_overview"
+              name="Stock Overview"
+              parent="menu_inventory_root"
+              action="action_inventory_overview"
+              sequence="40"/>
+
+    <menuitem id="menu_stockroom_config"
+              name="Configuration"
+              parent="menu_inventory_root"
+              sequence="50"/>
+
+    <!-- Locations -->
+    <menuitem id="menu_stockroom_location"
+              name="Locations"
+              parent="menu_stockroom_config"
+              action="action_stockroom_location"/>
+
+    <!-- Outlets -->
+    <menuitem id="menu_stockroom_outlet"
+              name="Outlets"
+              parent="menu_stockroom_config"
+              action="action_stockroom_outlet"/>
+
+    <!-- Vendors -->
+    <menuitem id="menu_stockroom_vendor"
+              name="Vendors"
+              parent="menu_stockroom_config"
+              action="action_stockroom_vendor"/>
+
+    <!-- Products -->
+    <menuitem id="menu_stockroom_product"
+              name="Products"
+              parent="menu_stockroom_config"
+              action="action_stockroom_product"/>
+
+
+</odoo>
