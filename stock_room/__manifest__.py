@@ -1,10 +1,11 @@
 {
     'name': "Stockroom",
-    'version': "18.0.1.1",
+    'version': "18.0.1.2",
     'license': "LGPL-3",
     'description': """ Inventory management system for small to medium businesses. Best suited for Cafeterias with multiple outlets. """,
-    'summary': "Manage stock across multiple locations and outlets.",
-    'category': "Inventory",
+    'summary': "Inventory system for Cafe with multiple outlets",
+    'category': "Warehouse",
+    'website': 'https://www.dhruvpatel.site',
     'depends':[
         'mail',
     ],
@@ -19,6 +20,10 @@
         "views/vendor_views.xml",
         "views/menu.xml"
     ],
-    'author': "Dhruv Patel"
+    'author': "Dhruv Patel",
+    'images': ['static/description/banner.gif'],
+    'installable': True,
+    'application': True,
+    'auto_install': False
 
 }
