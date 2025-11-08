@@ -3,7 +3,9 @@
     <!-- Top Level Menu -->
     <menuitem id="menu_inventory_root"
               name="Stockroom"
-              sequence="10"/>
+              sequence="10"
+              web_icon="stock_room,static/description/icon.png"
+    />
 
     <!-- Submenu: Receive -->
     <menuitem id="menu_inventory_receive"
