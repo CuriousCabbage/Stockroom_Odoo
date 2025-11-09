@@ -5,7 +5,7 @@
     'description': """ Inventory management system for small to medium businesses. Best suited for Cafeterias with multiple outlets. """,
     'summary': "Inventory system for Cafe with multiple outlets",
     'category': "Warehouse",
-    'website': 'https://myportfolio-kappa-ivory.vercel.app/',
+    'website': 'https://myportfolio-kappa-ivory.vercel.app',
     'depends':[
         'mail',
     ],
