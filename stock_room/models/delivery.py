@@ -1,4 +1,3 @@
-# stock_room/models/delivery.py
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -27,7 +26,7 @@ class StockroomDelivery(models.Model):
         string='Status', default='draft', required=True, tracking=True
     )
 
-    # open confirm wizard (review page) for this delivery
+    # confirm wizard
     def action_open_confirm_wizard(self):
         self.ensure_one()
         wizard = self.env['stockroom.delivery.confirm.wizard'].create({'delivery_id': self.id})
@@ -42,7 +41,7 @@ class StockroomDelivery(models.Model):
             'target': 'new',
         }
 
-    # open cancel wizard
+    # cancel wizard
     def action_open_cancel_wizard(self):
         self.ensure_one()
         wizard = self.env['stockroom.delivery.cancel.wizard'].create({'delivery_id': self.id})
@@ -55,11 +54,10 @@ class StockroomDelivery(models.Model):
             'target': 'new',
         }
 
-    # Prevent editing a confirmed delivery (you can adjust allowed fields)
+    # Prevent editing a confirmed delivery
     def write(self, vals):
         for rec in self:
             if rec.state == 'confirmed':
-                # If anything other than non-business UI-only fields is changing, block it
                 raise ValidationError("Confirmed deliveries cannot be edited. Create a reverse/correction delivery instead.")
         return super().write(vals)
 
@@ -84,21 +82,21 @@ class StockroomDeliveryLine(models.Model):
     @api.onchange("product_id")
     def _onchange_product_id(self):
         if self.product_id:
-            # fill UI and default values from product
+            
             self.outlet_id = self.product_id.outlet_id.id
             self.location_id = self.product_id.location_id.id
 
-    # block creation on confirmed parent (defensive)
+    
     @api.model_create_multi
     def create(self, vals_list):
-        # If the parent delivery is confirmed, prevent adding lines
+        
         for vals in vals_list:
             delivery_id = vals.get('delivery_id')
             if delivery_id:
                 delivery = self.env['stockroom.delivery'].browse(delivery_id)
                 if delivery and delivery.state == 'confirmed':
                     raise ValidationError("Cannot add lines to a confirmed delivery.")
-        # do normal creation; inventory update happens only at delivery confirm
+        
         return super().create(vals_list)
 
     def write(self, vals):
@@ -115,7 +113,7 @@ class StockroomDeliveryLine(models.Model):
         return super().unlink()
 
 
-# --- Confirm Wizard (transient) ---
+#  Confirm Wizard (transient) 
 class StockroomDeliveryConfirmWizard(models.TransientModel):
     _name = "stockroom.delivery.confirm.wizard"
     _description = "Confirm Delivery Wizard"
@@ -140,7 +138,7 @@ class StockroomDeliveryConfirmWizard(models.TransientModel):
             })
         if lines:
             self.env['stockroom.delivery.confirm.wizard.line'].create(lines)
-        # reload self lines
+        
         self.invalidate_recordset()
 
     def action_confirm(self):
@@ -149,7 +147,7 @@ class StockroomDeliveryConfirmWizard(models.TransientModel):
         delivery = self.delivery_id
         if delivery.state != 'draft':
             raise ValidationError("Only draft deliveries can be confirmed.")
-        # Use the real delivery lines to update inventory (fresh values)
+        
         for dl in delivery.line_ids:
             self.env['stockroom.inventory'].add_stock(
                 product=dl.product_id,
@@ -177,7 +175,7 @@ class StockroomDeliveryConfirmWizardLine(models.TransientModel):
     expiry_date = fields.Date(string='Expiry')
 
 
-# --- Cancel Wizard (simple confirmation) ---
+# Cancel Wizard (simple confirmation) 
 class StockroomDeliveryCancelWizard(models.TransientModel):
     _name = "stockroom.delivery.cancel.wizard"
     _description = "Cancel Delivery Wizard"
@@ -188,7 +186,7 @@ class StockroomDeliveryCancelWizard(models.TransientModel):
         self.ensure_one()
         delivery = self.delivery_id
         if delivery.state == 'confirmed':
-            # if you want to allow cancelling confirmed deliveries, you'd need reverse logic.
+            
             raise ValidationError("Cannot cancel a confirmed delivery. Use reverse workflow.")
         delivery.state = 'cancelled'
         return {'type': 'ir.actions.act_window_close'}
