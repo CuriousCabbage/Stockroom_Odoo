@@ -175,7 +175,7 @@ class StockroomDeliveryConfirmWizardLine(models.TransientModel):
     expiry_date = fields.Date(string='Expiry')
 
 
-# Cancel Wizard (simple confirmation) 
+# Cancel Wizard
 class StockroomDeliveryCancelWizard(models.TransientModel):
     _name = "stockroom.delivery.cancel.wizard"
     _description = "Cancel Delivery Wizard"
