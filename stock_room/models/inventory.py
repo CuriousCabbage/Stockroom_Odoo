@@ -66,26 +66,26 @@ class StockroomInventory(models.Model):
     def _compute_display_name(self):
         for rec in self:
             parts = []
-            # product name first
+            
             if rec.product_id and rec.product_id.name:
                 parts.append(rec.product_id.name)
-            # expiry date, convert safely to date object then format
+           
             if rec.expiry_date:
                 try:
-                    # fields.Date.to_date handles string or date
+                    
                     exp_date = fields.Date.to_date(rec.expiry_date)
                     parts.append("Exp: " + exp_date.strftime('%b %d, %Y'))
                 except Exception:
-                    # fallback to raw value if formatting fails
+                    
                     parts.append("Exp: " + str(rec.expiry_date))
-            # location/outlet optional
+           
             if rec.location_id and rec.location_id.name:
                 parts.append(str(rec.location_id.name))
             if rec.outlet_id and rec.outlet_id.name:
                 parts.append(str(rec.outlet_id.name))
-            # quantity last
+            
             qty = rec.quantity or 0.0
-            # show int when whole number
+            
             qty_label = str(int(qty)) if float(qty).is_integer() else str(qty)
             parts.append("Qty: " + qty_label)
             rec.display_name = " · ".join(parts) if parts else f"batch {rec.id}"
