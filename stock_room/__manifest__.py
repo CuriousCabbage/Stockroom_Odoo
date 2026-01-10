@@ -10,6 +10,7 @@
         'mail',
     ],
     'data': [
+        "security/security.xml",
         "security/ir.model.access.csv",
         "views/location_views.xml",
         "views/outlet_views.xml",

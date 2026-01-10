@@ -27,7 +27,7 @@
         </field>
     </record>
 
-    <!-- Actions for Vendors -->
+    
     <record id="action_stockroom_vendor" model="ir.actions.act_window">
         <field name="name">Vendors</field>
         <field name="res_model">stockroom.vendor</field>

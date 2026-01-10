@@ -32,7 +32,7 @@
     </record>
 
 
-    <!-- Actions for Locations -->
+    
     <record id="action_stockroom_location" model="ir.actions.act_window">
         <field name="name">Locations</field>
         <field name="res_model">stockroom.location</field>

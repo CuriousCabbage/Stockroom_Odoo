@@ -37,7 +37,7 @@
         </field>
     </record>
 
-    <!-- Actions for Products -->
+    
     <record id="action_stockroom_product" model="ir.actions.act_window">
         <field name="name">Products</field>
         <field name="res_model">stockroom.product</field>

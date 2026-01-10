@@ -27,7 +27,7 @@ class StockroomUsageLine(models.Model):
         "stockroom.inventory",
         string="Batch",
         required=True,
-        domain="[('product_id', '=', product_id)]",  # only batches of selected product
+        domain="[('product_id', '=', product_id)]", 
     )
 
     available_qty = fields.Float(
@@ -43,7 +43,7 @@ class StockroomUsageLine(models.Model):
         for rec in self:
             rec.available_qty = rec.inventory_id.quantity if rec.inventory_id else 0.0
 
-    # --- Inline warning when user enters too much ---
+   
     @api.onchange("quantity_used", "inventory_id")
     def _onchange_quantity_or_inventory(self):
         for rec in self:
@@ -57,7 +57,7 @@ class StockroomUsageLine(models.Model):
                         }
                     }
 
-    # --- Decrement stock when a line is created ---
+    
     @api.model_create_multi
     def create(self, vals_list):
         lines = super().create(vals_list)

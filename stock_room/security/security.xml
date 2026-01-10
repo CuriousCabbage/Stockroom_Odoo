@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id = "module_category_stockroom" model = "ir.module.category">
+        <field name="name">Stockroom</field>
+        <field name="sequence">6</field>
+    </record>
+
+    <record id="group_stockroom_staff" model = "res.groups">
+        <field name="name">Staff</field>
+        <field name="category_id" ref="stock_room.module_category_stockroom"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">The user will have access to stockroom operations as a staff member.</field>
+    </record>
+
+    <record id="group_stockroom_manager" model = "res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="stock_room.module_category_stockroom"/>
+        <field name="implied_ids" eval="[(4, ref('stock_room.group_stockroom_staff'))]"/>
+        <field name="comment">The user will have full access to stockroom operations as a manager.</field>
+    </record>
+
+</odoo>
