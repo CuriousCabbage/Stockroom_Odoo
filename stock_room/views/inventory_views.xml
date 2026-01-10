@@ -8,7 +8,7 @@
         <field name="model">stockroom.inventory</field>
         <field name="arch" type="xml">
             <list string="Inventory Overview" default_order="expiry_date asc, quantity desc">
-                <!-- Highlight expired products in red -->
+                
                 <field name="product_id"/>
                 <field name="outlet_id"/>
                 <field name="location_id"/>

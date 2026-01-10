@@ -27,31 +27,31 @@
               parent="menu_inventory_root"
               action="action_inventory_overview"
               sequence="40"/>
-
+    <!-- Configuration -->
     <menuitem id="menu_stockroom_config"
               name="Configuration"
               parent="menu_inventory_root"
               sequence="50"/>
 
-    <!-- Locations -->
+    <!-- Submenu: Locations -->
     <menuitem id="menu_stockroom_location"
               name="Locations"
               parent="menu_stockroom_config"
               action="action_stockroom_location"/>
 
-    <!-- Outlets -->
+    <!-- Submenu: Outlets -->
     <menuitem id="menu_stockroom_outlet"
               name="Outlets"
               parent="menu_stockroom_config"
               action="action_stockroom_outlet"/>
 
-    <!-- Vendors -->
+    <!-- Submenu: Vendors -->
     <menuitem id="menu_stockroom_vendor"
               name="Vendors"
               parent="menu_stockroom_config"
               action="action_stockroom_vendor"/>
 
-    <!-- Products -->
+    <!-- Submenu: Products -->
     <menuitem id="menu_stockroom_product"
               name="Products"
               parent="menu_stockroom_config"

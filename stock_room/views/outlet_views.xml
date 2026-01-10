@@ -27,7 +27,7 @@
         </field>
     </record>
 
-    <!-- Actions for Outlets -->
+    
     <record id="action_stockroom_outlet" model="ir.actions.act_window">
         <field name="name">Outlets</field>
         <field name="res_model">stockroom.outlet</field>

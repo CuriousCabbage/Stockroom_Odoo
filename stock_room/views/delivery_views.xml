@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <!-- List View: show deliveries with basic info -->
+    
     <record id="view_inventory_receive_list" model="ir.ui.view">
         <field name="name">stockroom.delivery.list</field>
         <field name="model">stockroom.delivery</field>
@@ -15,7 +15,7 @@
         </field>
     </record>
 
-    <!-- Form View: header + lines -->
+    
     <record id="view_inventory_receive_form" model="ir.ui.view">
         <field name="name">stockroom.delivery.form</field>
         <field name="model">stockroom.delivery</field>
@@ -84,7 +84,7 @@
         </field>
     </record>
 
-    <!-- Cancel Wizard -->
+    
     <record id="view_stockroom_delivery_cancel_wizard" model="ir.ui.view">
         <field name="name">stockroom.delivery.cancel.wizard.form</field>
         <field name="model">stockroom.delivery.cancel.wizard</field>
@@ -107,7 +107,7 @@
     </record>
 
 
-    <!-- Action -->
+    
     <record id="action_inventory_receive" model="ir.actions.act_window">
         <field name="name">Receive</field>
         <field name="res_model">stockroom.delivery</field>
